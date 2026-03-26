@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Ace Capital Investment</title>
+  <link rel="icon" href="assets/img/favicon.png">
+  <!-- CSS only -->
+   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"> 
+   <!-- fancybox -->
+   <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+   <link rel="stylesheet" href="assets/css/nice-select.css"> 
+   <!-- Font Awesome 6 -->
+   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+   <link rel="stylesheet" href="assets/css/swiper.css"> 
+   <!-- style -->
+   <link rel="stylesheet" href="assets/css/style.css">
+   <!-- responsive -->
+   <link rel="stylesheet" href="assets/css/responsive.css"> 
+   <style>
+     .register-container {
+       min-height: 100vh;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+       padding: 40px 20px;
+     }
+     .register-box {
+       background: white;
+       border-radius: 12px;
+       padding: 50px;
+       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+       width: 100%;
+       max-width: 500px;
+     }
+     .register-box h2 {
+       text-align: center;
+       margin-bottom: 10px;
+       color: #1a1a1a;
+       font-weight: bold;
+       font-size: 28px;
+     }
+     .register-box p {
+       text-align: center;
+       color: #666;
+       margin-bottom: 30px;
+       font-size: 14px;
+     }
+     .form-group {
+       margin-bottom: 18px;
+     }
+     .form-row {
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 15px;
+     }
+     .form-group label {
+       display: block;
+       margin-bottom: 8px;
+       color: #333;
+       font-weight: 600;
+       font-size: 14px;
+     }
+     .form-group input,
+     .form-group select {
+       width: 100%;
+       padding: 12px 15px;
+       border: 1px solid #ddd;
+       border-radius: 6px;
+       font-size: 14px;
+       transition: border-color 0.3s ease;
+       font-family: inherit;
+     }
+     .form-group input:focus,
+     .form-group select:focus {
+       outline: none;
+       border-color: #FFB400;
+       box-shadow: 0 0 0 3px rgba(255, 180, 0, 0.1);
+     }
+     .form-group textarea {
+       width: 100%;
+       padding: 12px 15px;
+       border: 1px solid #ddd;
+       border-radius: 6px;
+       font-size: 14px;
+       transition: border-color 0.3s ease;
+       font-family: inherit;
+       resize: vertical;
+       min-height: 80px;
+     }
+     .form-group textarea:focus {
+       outline: none;
+       border-color: #FFB400;
+       box-shadow: 0 0 0 3px rgba(255, 180, 0, 0.1);
+     }
+     .terms {
+       display: flex;
+       align-items: flex-start;
+       margin-bottom: 25px;
+       font-size: 13px;
+       gap: 8px;
+     }
+     .terms input[type="checkbox"] {
+       margin-top: 4px;
+       cursor: pointer;
+     }
+     .terms a {
+       color: #FFB400;
+       text-decoration: none;
+       transition: color 0.3s ease;
+     }
+     .terms a:hover {
+       color: #ff9500;
+     }
+     .register-btn {
+       width: 100%;
+       padding: 14px;
+       background: linear-gradient(135deg, #FFB400 0%, #FF9500 100%);
+       color: #1a1a1a;
+       border: none;
+       border-radius: 6px;
+       font-weight: 600;
+       font-size: 16px;
+       cursor: pointer;
+       transition: transform 0.3s ease, box-shadow 0.3s ease;
+     }
+     .register-btn:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
+     }
+     .login-link {
+       text-align: center;
+       margin-top: 20px;
+       font-size: 14px;
+       color: #666;
+     }
+     .login-link a {
+       color: #FFB400;
+       text-decoration: none;
+       font-weight: 600;
+       transition: color 0.3s ease;
+     }
+     .login-link a:hover {
+       color: #ff9500;
+     }
+     .divider {
+       display: flex;
+       align-items: center;
+       margin: 25px 0;
+       color: #999;
+       font-size: 13px;
+     }
+     .divider::before,
+     .divider::after {
+       content: '';
+       flex: 1;
+       height: 1px;
+       background: #ddd;
+     }
+     .divider span {
+       margin: 0 15px;
+     }
+     .social-signup {
+       display: flex;
+       gap: 12px;
+       margin-top: 20px;
+     }
+     .social-btn {
+       flex: 1;
+       padding: 12px;
+       border: 1px solid #ddd;
+       background: white;
+       border-radius: 6px;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       gap: 8px;
+       font-size: 13px;
+       font-weight: 500;
+       color: #333;
+     }
+     .social-btn:hover {
+       border-color: #FFB400;
+       background: rgba(255, 180, 0, 0.05);
+     }
+   </style>
+ </head>
+<body>
+<!-- preloader -->
+ <div class="preloader">
+    <div class="loader"></div> 
+ </div>
+<!-- preloader end -->
+<!-- header -->
+<header>
+  <div class="container">
+    <div class="top-bar">
+      <div class="logo">
+        <a href="index.html">
+          <h2 style="color: white; margin: 0; font-size: 24px; font-weight: bold;">ACE CAPITAL</h2>
+        </a>
+      </div>
+     
+      <div class="header-right">
+        <div class="login">
+          <a href="login.html" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.4227 14.036C24.4227 10.4709 21.5312 7.57945 17.9661 7.57945C14.4009 7.57945 11.5095 10.4709 11.5095 14.036C11.5095 17.6012 14.4009 20.4926 17.9661 20.4926C21.5312 20.4926 24.4227 17.6012 24.4227 14.036ZM13.1938 14.036C13.1938 11.3972 15.3273 9.26377 17.9661 9.26377C20.6049 9.26377 22.7383 11.3972 22.7383 14.036C22.7383 16.6748 20.6049 18.8083 17.9661 18.8083C15.3273 18.8083 13.1938 16.6748 13.1938 14.036Z" fill="white"/>
+              <path d="M7.15832 30.3739C7.29868 30.4582 7.43904 30.4862 7.5794 30.4862C7.86012 30.4862 8.16891 30.3459 8.30927 30.0651C10.2743 26.5842 13.9798 24.4227 17.9661 24.4227C21.9523 24.4227 25.6578 26.5842 27.6509 30.0651C27.8755 30.4582 28.4088 30.5985 28.8019 30.3739C29.1949 30.1494 29.3352 29.616 29.1106 29.223C26.8368 25.2368 22.5699 22.7383 17.9661 22.7383C13.3622 22.7383 9.09529 25.2368 6.82145 29.223C6.59688 29.616 6.73724 30.1494 7.15832 30.3739Z" fill="white"/>
+            </svg>
+            Login
+          </a>
+        </div>
+        <a href="#" class="union" id="show">
+          <svg width="24" height="6" viewBox="0 0 24 6" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.85938 0C4.41439 8.73645e-05 5.6748 1.2604 5.6748 2.81543C5.67474 4.3704 4.41435 5.63077 2.85938 5.63086C1.30433 5.63086 0.0440144 4.37046 0.0439453 2.81543C0.0439453 1.26034 1.30429 0 2.85938 0ZM11.8691 0C13.4242 0 14.6855 1.26034 14.6855 2.81543C14.6855 4.37046 13.4242 5.63086 11.8691 5.63086C10.3143 5.63065 9.05378 4.37033 9.05371 2.81543C9.05371 1.26047 10.3142 0.00021094 11.8691 0ZM20.8799 0C22.435 0 23.6953 1.26034 23.6953 2.81543C23.6952 4.37046 22.4349 5.63086 20.8799 5.63086C19.3249 5.63083 18.0645 4.37044 18.0645 2.81543C18.0645 1.26036 19.3248 3.00267e-05 20.8799 0Z" />
+          </svg> 
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- header end -->
+
+<!-- Registration Section -->
+<section class="register-container">
+  <div class="register-box">
+    <h2>Create Account</h2>
+    <p>Join thousands of investors and start growing your wealth</p>
+    
+    <form method="POST" action="dashboard.html">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" id="firstname" name="firstname" placeholder="John" required>
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" id="lastname" name="lastname" placeholder="Doe" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="usa">United States</option>
+            <option value="canada">Canada</option>
+            <option value="uk">United Kingdom</option>
+            <option value="australia">Australia</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="investment">Initial Investment</label>
+          <select id="investment" name="investment" required>
+            <option value="">Select Amount</option>
+            <option value="1000">$1,000 - $9,999</option>
+            <option value="10000">$10,000 - $99,999</option>
+            <option value="100000">$100,000+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm">Confirm Password</label>
+        <input type="password" id="confirm" name="confirm" placeholder="Re-enter your password" required>
+      </div>
+
+      <div class="terms">
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms" style="margin: 0;">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+      </div>
+
+      <button type="submit" class="register-btn">Create Account</button>
+    </form>
+
+    <div class="divider">
+      <span>or sign up with</span>
+    </div>
+
+    <div class="social-signup">
+      <button class="social-btn">
+        <img src="assets/img/google-color.png" alt="Google" style="width: 18px; height: 18px;">
+        Google
+      </button>
+      <button class="social-btn">
+        <i class="fab fa-facebook-f"></i> Facebook
+      </button>
+    </div>
+
+    <div class="login-link">
+      Already have an account? <a href="login.html">Sign in here</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="gap no-bottom" style="background-color: #000;">
+  <div class="container">
+    
+    <div class="copyright" style="margin-top: 0px;">
+      <p>Copyright © 2024 <b>Ace Capital Investments.</b> All Rights Reserved. </p>
+     
+    </div>
+  </div>
+</footer>
+<div id="scroll-percentage"><span id="scroll-percentage-value"></span></div>
+
+<!-- javascript -->
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/custom.js"></script>
+</body>
+</html>

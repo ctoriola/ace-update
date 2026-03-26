@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Ace Capital Investment</title>
+  <link rel="icon" href="assets/img/favicon.png">
+  <!-- CSS only -->
+   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"> 
+   <!-- fancybox -->
+   <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+   <link rel="stylesheet" href="assets/css/nice-select.css"> 
+   <!-- Font Awesome 6 -->
+   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+   <link rel="stylesheet" href="assets/css/swiper.css"> 
+   <!-- style -->
+   <link rel="stylesheet" href="assets/css/style.css">
+   <!-- responsive -->
+   <link rel="stylesheet" href="assets/css/responsive.css"> 
+   <style>
+     .dashboard-container {
+       min-height: 100vh;
+       background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
+       padding: 60px 20px 40px;
+     }
+     .dashboard-header {
+       text-align: center;
+       margin-bottom: 50px;
+     }
+     .dashboard-header h1 {
+       font-size: 36px;
+       color: #1a1a1a;
+       font-weight: bold;
+       margin-bottom: 10px;
+     }
+     .dashboard-header p {
+       color: #666;
+       font-size: 16px;
+     }
+     .dashboard-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+       gap: 25px;
+       max-width: 1400px;
+       margin: 0 auto;
+     }
+     .dashboard-card {
+       background: white;
+       border-radius: 12px;
+       padding: 30px;
+       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+       transition: all 0.3s ease;
+       border-left: 4px solid #FFB400;
+     }
+     .dashboard-card:hover {
+       transform: translateY(-8px);
+       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+     }
+     .dashboard-card.primary {
+       border-left-color: #FFB400;
+       background: linear-gradient(135deg, rgba(255, 180, 0, 0.05) 0%, rgba(255, 180, 0, 0.02) 100%);
+     }
+     .dashboard-card.success {
+       border-left-color: #27ae60;
+       background: linear-gradient(135deg, rgba(39, 174, 96, 0.05) 0%, rgba(39, 174, 96, 0.02) 100%);
+     }
+     .dashboard-card.danger {
+       border-left-color: #e74c3c;
+       background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(231, 76, 60, 0.02) 100%);
+     }
+     .dashboard-card.info {
+       border-left-color: #3498db;
+       background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(52, 152, 219, 0.02) 100%);
+     }
+     .card-header {
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       margin-bottom: 20px;
+     }
+     .card-title {
+       font-size: 14px;
+       font-weight: 600;
+       color: #666;
+       text-transform: uppercase;
+       letter-spacing: 0.5px;
+       margin: 0;
+     }
+     .card-icon {
+       font-size: 24px;
+       width: 50px;
+       height: 50px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border-radius: 8px;
+       background: rgba(0, 0, 0, 0.05);
+     }
+     .card-icon.primary {
+       background: rgba(255, 180, 0, 0.2);
+       color: #FFB400;
+     }
+     .card-icon.success {
+       background: rgba(39, 174, 96, 0.2);
+       color: #27ae60;
+     }
+     .card-icon.danger {
+       background: rgba(231, 76, 60, 0.2);
+       color: #e74c3c;
+     }
+     .card-icon.info {
+       background: rgba(52, 152, 219, 0.2);
+       color: #3498db;
+     }
+     .card-value {
+       font-size: 32px;
+       font-weight: bold;
+       color: #1a1a1a;
+       margin-bottom: 8px;
+     }
+     .card-currency {
+       font-size: 18px;
+       color: #666;
+       font-weight: 600;
+     }
+     .card-meta {
+       font-size: 12px;
+       color: #999;
+       margin-top: 15px;
+       padding-top: 15px;
+       border-top: 1px solid rgba(0, 0, 0, 0.05);
+     }
+     .card-meta i {
+       margin-right: 6px;
+     }
+     @media (max-width: 768px) {
+       .dashboard-container {
+         padding: 40px 15px 30px;
+       }
+       .dashboard-header h1 {
+         font-size: 28px;
+       }
+       .dashboard-grid {
+         grid-template-columns: 1fr;
+         gap: 20px;
+       }
+       .dashboard-card {
+         padding: 25px;
+       }
+       .card-value {
+         font-size: 26px;
+       }
+     }
+   </style>
+ </head>
+<body>
+<!-- preloader -->
+ <div class="preloader">
+    <div class="loader"></div> 
+ </div>
+<!-- preloader end -->
+<!-- header -->
+<header>
+  <div class="container">
+    <div class="top-bar">
+      <div class="logo">
+        <a href="index.html">
+          <h2 style="color: white; margin: 0; font-size: 24px; font-weight: bold;">ACE CAPITAL</h2>
+        </a>
+      </div>
+      <nav class="navbar">
+        <ul class="navbar-links">
+          <li class="navbar-dropdown">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="navbar-dropdown">
+            <a href="index.html#about">About</a>
+          </li>
+          <li class="navbar-dropdown">
+            <a href="index.html#services">How It Works</a>
+          </li>
+          <li class="navbar-dropdown">
+            <a href="index.html#pricing">Pricing</a>
+          </li>
+          <li class="navbar-dropdown">
+            <a href="index.html#team">Team</a>
+          </li>
+        </ul>
+      </nav> 
+      <div class="header-right">
+        <div class="login">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24.4227 14.036C24.4227 10.4709 21.5312 7.57945 17.9661 7.57945C14.4009 7.57945 11.5095 10.4709 11.5095 14.036C11.5095 17.6012 14.4009 20.4926 17.9661 20.4926C21.5312 20.4926 24.4227 17.6012 24.4227 14.036ZM13.1938 14.036C13.1938 11.3972 15.3273 9.26377 17.9661 9.26377C20.6049 9.26377 22.7383 11.3972 22.7383 14.036C22.7383 16.6748 20.6049 18.8083 17.9661 18.8083C15.3273 18.8083 13.1938 16.6748 13.1938 14.036Z" fill="white"/>
+            <path d="M7.15832 30.3739C7.29868 30.4582 7.43904 30.4862 7.5794 30.4862C7.86012 30.4862 8.16891 30.3459 8.30927 30.0651C10.2743 26.5842 13.9798 24.4227 17.9661 24.4227C21.9523 24.4227 25.6578 26.5842 27.6509 30.0651C27.8755 30.4582 28.4088 30.5985 28.8019 30.3739C29.1949 30.1494 29.3352 29.616 29.1106 29.223C26.8368 25.2368 22.5699 22.7383 17.9661 22.7383C13.3622 22.7383 9.09529 25.2368 6.82145 29.223C6.59688 29.616 6.73724 30.1494 7.15832 30.3739Z" fill="white"/>
+          </svg>
+          <a href="login.html" style="color: white; text-decoration: none;">Profile</a>
+        </div>
+        <div class="login">
+          <a href="login.html" class="btn" style="padding: 8px 16px; border-radius: 4px;">
+            <span class="btn-wrap">
+              <span class="text-one">Logout</span>
+              <span class="text-two">Logout</span>
+            </span>
+          </a>
+        </div>
+        <a href="#" class="union" id="show">
+          <svg width="24" height="6" viewBox="0 0 24 6" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.85938 0C4.41439 8.73645e-05 5.6748 1.2604 5.6748 2.81543C5.67474 4.3704 4.41435 5.63077 2.85938 5.63086C1.30433 5.63086 0.0440144 4.37046 0.0439453 2.81543C0.0439453 1.26034 1.30429 0 2.85938 0ZM11.8691 0C13.4242 0 14.6855 1.26034 14.6855 2.81543C14.6855 4.37046 13.4242 5.63086 11.8691 5.63086C10.3143 5.63065 9.05378 4.37033 9.05371 2.81543C9.05371 1.26047 10.3142 0.00021094 11.8691 0ZM20.8799 0C22.435 0 23.6953 1.26034 23.6953 2.81543C23.6952 4.37046 22.4349 5.63086 20.8799 5.63086C19.3249 5.63083 18.0645 4.37044 18.0645 2.81543C18.0645 1.26036 19.3248 3.00267e-05 20.8799 0Z" />
+          </svg> 
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- header end -->
+
+<!-- Dashboard Section -->
+<section class="dashboard-container">
+  <div class="container">
+    <div class="dashboard-header">
+      <h1>Investment Dashboard</h1>
+      <p>Monitor your portfolio performance and account activity</p>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Current Balance Card -->
+      <div class="dashboard-card primary">
+        <div class="card-header">
+          <h3 class="card-title">Current Balance</h3>
+          <div class="card-icon primary">
+            <i class="fas fa-wallet"></i>
+          </div>
+        </div>
+        <div class="card-value">24,200</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-check-circle" style="color: #27ae60;"></i> Active
+        </div>
+      </div>
+
+      <!-- Earning Total Card -->
+      <div class="dashboard-card success">
+        <div class="card-header">
+          <h3 class="card-title">Earning Total</h3>
+          <div class="card-icon success">
+            <i class="fas fa-chart-line"></i>
+          </div>
+        </div>
+        <div class="card-value">15,750</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-arrow-up" style="color: #27ae60;"></i> All Time
+        </div>
+      </div>
+
+      <!-- Total Withdraw Card -->
+      <div class="dashboard-card danger">
+        <div class="card-header">
+          <h3 class="card-title">Total Withdraw</h3>
+          <div class="card-icon danger">
+            <i class="fas fa-arrow-down"></i>
+          </div>
+        </div>
+        <div class="card-value">0</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-calendar"></i> All Time
+        </div>
+      </div>
+
+      <!-- This Period Deposit Card -->
+      <div class="dashboard-card info">
+        <div class="card-header">
+          <h3 class="card-title">This Period Deposit</h3>
+          <div class="card-icon info">
+            <i class="fas fa-plus-circle"></i>
+          </div>
+        </div>
+        <div class="card-value">20,000</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-calendar-alt"></i> Current Period
+        </div>
+      </div>
+
+      <!-- This Period Earn Card -->
+      <div class="dashboard-card success">
+        <div class="card-header">
+          <h3 class="card-title">This Period Earn</h3>
+          <div class="card-icon success">
+            <i class="fas fa-coins"></i>
+          </div>
+        </div>
+        <div class="card-value">15,750</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-check"></i> Period Earnings
+        </div>
+      </div>
+
+      <!-- This Period Withdraw Card -->
+      <div class="dashboard-card danger">
+        <div class="card-header">
+          <h3 class="card-title">This Period Withdraw</h3>
+          <div class="card-icon danger">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+        </div>
+        <div class="card-value">0</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-calendar-alt"></i> Current Period
+        </div>
+      </div>
+
+      <!-- Total Pending Withdraw Card -->
+      <div class="dashboard-card primary">
+        <div class="card-header">
+          <h3 class="card-title">Total Pending Withdraw</h3>
+          <div class="card-icon primary">
+            <i class="fas fa-hourglass-half"></i>
+          </div>
+        </div>
+        <div class="card-value">0</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-clock"></i> Awaiting Processing
+        </div>
+      </div>
+
+      <!-- Total Fund Transfer Card -->
+      <div class="dashboard-card info">
+        <div class="card-header">
+          <h3 class="card-title">Total Fund Transfer</h3>
+          <div class="card-icon info">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+        </div>
+        <div class="card-value">0</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-database"></i> All Time
+        </div>
+      </div>
+
+      <!-- This Period Fund Transfer Card -->
+      <div class="dashboard-card info">
+        <div class="card-header">
+          <h3 class="card-title">This Period Fund Transfer</h3>
+          <div class="card-icon info">
+            <i class="fas fa-arrows-alt-h"></i>
+          </div>
+        </div>
+        <div class="card-value">0</div>
+        <div class="card-currency">USD</div>
+        <div class="card-meta">
+          <i class="fas fa-calendar-alt"></i> Current Period
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="gap no-bottom" style="background-color: #000;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="links">
+          <a href="#">
+            facebook
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.19 5.80443C20.5695 4.18462 18.505 3.08173 16.2577 2.63521C14.0103 2.18869 11.6811 2.4186 9.56439 3.29586C7.44772 4.17312 5.63872 5.65834 4.36614 7.5637C3.09356 9.46907 2.41455 11.709 2.41498 14.0003C2.41498 17.0733 3.63535 20.0206 5.80779 22.1942C7.98023 24.3677 10.9269 25.5895 14 25.5911C15.5207 25.5917 17.0269 25.2945 18.4333 24.7161C19.8353 24.1243 21.1106 23.2688 22.19 22.1961C23.2664 21.1199 24.1203 19.8421 24.7028 18.4359C25.2854 17.0296 25.5852 15.5224 25.5852 14.0003C25.5852 12.4781 25.2854 10.9709 24.7028 9.56463C24.1203 8.15838 23.2664 6.88065 22.19 5.80443ZM21.3733 21.3678C19.705 23.0432 17.516 24.1006 15.1666 24.3661V16.7128H17.36C17.6694 16.7128 17.9661 16.5898 18.1849 16.3711C18.4037 16.1523 18.5266 15.8555 18.5266 15.5461C18.5266 15.2367 18.4037 14.9399 18.1849 14.7211C17.9661 14.5023 17.6694 14.3794 17.36 14.3794H15.1666V11.1828C15.1666 10.8733 15.2896 10.5766 15.5084 10.3578C15.7271 10.139 16.0239 10.0161 16.3333 10.0161H17.7333C18.0427 10.0161 18.3395 9.89318 18.5583 9.67439C18.7771 9.45559 18.9 9.15885 18.9 8.84943C18.9 8.54001 18.7771 8.24326 18.5583 8.02447C18.3395 7.80568 18.0427 7.68276 17.7333 7.68276H15.75C14.9764 7.68276 14.2346 7.99005 13.6876 8.53703C13.1406 9.08401 12.8333 9.82588 12.8333 10.5994V14.3794H10.6516C10.3422 14.3794 10.0455 14.5023 9.82669 14.7211C9.60789 14.9399 9.48498 15.2367 9.48498 15.5461C9.48498 15.8555 9.60789 16.1523 9.82669 16.3711C10.0455 16.5898 10.3422 16.7128 10.6516 16.7128H12.8333V24.3661C10.6667 24.1189 8.63247 23.1973 7.018 21.7314C5.40353 20.2655 4.29041 18.3294 3.83586 16.1966C3.38131 14.0638 3.60831 11.8421 4.4848 9.84536C5.36128 7.84858 6.84295 6.17762 8.72052 5.06852C10.5981 3.95941 12.7767 3.46822 14.9485 3.66432C17.1204 3.86041 19.1757 4.73389 20.8242 6.16136C22.4728 7.58884 23.6312 9.49816 24.1358 11.6197C24.6405 13.7411 24.4659 15.9676 23.6366 17.9844C23.1085 19.2482 22.3398 20.3973 21.3733 21.3678Z" fill="#A9A9A9"/>
+          </svg> 
+        </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="links">
+          <a href="#">
+            linkedin
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.8125 4.6875H7.1875C5.80679 4.6875 4.6875 5.80679 4.6875 7.1875V22.8125C4.6875 24.1932 5.80679 25.3125 7.1875 25.3125H22.8125C24.1932 25.3125 25.3125 24.1932 25.3125 22.8125V7.1875C25.3125 5.80679 24.1932 4.6875 22.8125 4.6875Z" stroke="#A9A9A9"/>
+              <path d="M10.3125 13.4375V20.3125" stroke="#A9A9A9" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.3125 11.25C11.0029 11.25 11.5625 10.6904 11.5625 10C11.5625 9.30964 11.0029 8.75 10.3125 8.75C9.62214 8.75 9.0625 9.30964 9.0625 10C9.0625 10.6904 9.62214 11.25 10.3125 11.25Z" fill="#A9A9A9"/>
+              <path d="M19.6875 20.3125V16.25C19.6875 14.6967 18.4283 13.4375 16.875 13.4375C15.3217 13.4375 14.0625 14.6967 14.0625 16.25V20.3125" stroke="#A9A9A9" stroke-linecap="round"/>
+              </svg>
+
+        </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="links">
+          <a href="#">
+            Twitter
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.2342 10.1624L22.9766 0H20.9049L13.3139 8.82384L7.25095 0H0.258057L9.42642 13.3432L0.258057 24H2.32985L10.3462 14.6817L16.7491 24H23.742L14.2337 10.1624H14.2342ZM11.3966 13.4608L10.4676 12.1321L3.07634 1.55961H6.2585L12.2234 10.0919L13.1523 11.4206L20.9059 22.5113H17.7238L11.3966 13.4613V13.4608Z" fill="#A9A9A9"/>
+            </svg>
+
+        </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="links">
+          <a href="#">
+            instagram
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_19_125)">
+            <path d="M19.3538 5.99693V5.99768C19.3538 6.74318 18.7493 7.34693 18.0046 7.34693C17.2598 7.34693 16.6553 6.74243 16.6553 5.99768C16.6553 5.25218 17.2598 4.64843 18.0046 4.64843C18.7493 4.64918 19.3531 5.25218 19.3538 5.99693ZM12.0001 15.7492C9.9293 15.7492 8.2508 14.0707 8.2508 11.9999C8.2508 9.92918 9.9293 8.25068 12.0001 8.25068C14.0708 8.25068 15.7493 9.92918 15.7493 11.9999C15.7493 14.0699 14.0716 15.7484 12.0016 15.7484H12.0008L12.0001 15.7492ZM12.0001 6.22493C8.8103 6.22493 6.22505 8.81093 6.22505 11.9999C6.22505 15.1889 8.81105 17.7749 12.0001 17.7749C15.1898 17.7749 17.7751 15.1889 17.7751 11.9999C17.7751 11.9999 17.7751 11.9999 17.7751 11.9992C17.7751 8.81018 15.1898 6.22418 12.0001 6.22418C12.0001 6.22418 12.0001 6.22418 11.9993 6.22418L12.0001 6.22493ZM12.0001 2.77793C15.0023 2.77793 15.3601 2.79293 16.5458 2.84468C17.2981 2.85368 18.0135 2.99618 18.6758 3.24818L18.6331 3.23393C19.6186 3.61793 20.3836 4.38293 20.7593 5.34293L20.7683 5.36843C21.0053 5.98793 21.1463 6.70418 21.1553 7.45193V7.45568C21.2086 8.64218 21.2206 8.99843 21.2206 12.0014C21.2206 15.0044 21.2063 15.3614 21.1516 16.5472C21.1373 17.3002 20.9941 18.0157 20.7428 18.6779L20.7571 18.6344C20.5636 19.1414 20.2771 19.5734 19.9148 19.9289L19.9141 19.9297C19.5593 20.2927 19.1273 20.5792 18.6451 20.7614L18.621 20.7697C17.9993 21.0067 17.2808 21.1477 16.5301 21.1567H16.5263C15.3323 21.2099 14.9806 21.2219 11.9723 21.2219C8.96255 21.2219 8.61155 21.2077 7.4183 21.1529C6.6623 21.1387 5.9438 20.9954 5.27855 20.7442L5.3228 20.7584C4.8158 20.5679 4.3838 20.2807 4.0313 19.9169L4.03055 19.9162C3.6638 19.5637 3.3758 19.1309 3.19505 18.6464L3.18755 18.6232C2.9513 18.0022 2.80805 17.2844 2.7938 16.5344V16.5284C2.7518 15.3472 2.7368 14.9827 2.7368 11.9887C2.7368 8.99318 2.7518 8.62793 2.7938 7.43243C2.80805 6.67718 2.95055 5.95943 3.2018 5.29493L3.18755 5.33918C3.3728 4.82993 3.66155 4.39643 4.0298 4.04618L4.0313 4.04468C4.3823 3.67568 4.81505 3.38843 5.3003 3.21068L5.32355 3.20318C5.9408 2.96468 6.65405 2.82143 7.39955 2.80868H7.4048C8.59955 2.76668 8.9513 2.75243 11.9588 2.75243L12.0001 2.77793ZM12.0001 0.75293C8.94455 0.75293 8.56355 0.76718 7.36355 0.82043C6.3773 0.84143 5.44205 1.03193 4.57655 1.36268L4.63355 1.34393C3.85355 1.64168 3.18905 2.08343 2.64155 2.63993L2.6408 2.64068C2.08205 3.18818 1.64105 3.85343 1.35605 4.59593L1.3433 4.63343C1.0313 5.44193 0.840802 6.37793 0.820552 7.35443V7.36343C0.764302 8.56343 0.753052 8.94443 0.753052 11.9999C0.753052 15.0554 0.767302 15.4364 0.820552 16.6364C0.841552 17.6227 1.03205 18.5579 1.3628 19.4234L1.34405 19.3664C1.94105 20.8822 3.1178 22.0589 4.59455 22.6424L4.63355 22.6559C5.44205 22.9672 6.37805 23.1577 7.35455 23.1787H7.36355C8.56355 23.2349 8.94455 23.2462 12.0001 23.2462C15.0556 23.2462 15.4366 23.2319 16.6365 23.1787C17.6228 23.1569 18.5581 22.9672 19.4236 22.6364L19.3666 22.6559C20.8823 22.0589 22.0591 20.8822 22.6426 19.4054L22.656 19.3664C22.9681 18.5579 23.1578 17.6219 23.1788 16.6454V16.6364C23.2351 15.4364 23.2463 15.0554 23.2463 11.9999C23.2463 8.94443 23.232 8.56343 23.1788 7.36343C23.1571 6.37718 22.9673 5.44193 22.6365 4.57643L22.656 4.63343C22.3575 3.85343 21.9165 3.18893 21.3593 2.64143L21.3586 2.64068C20.8111 2.08193 20.1458 1.64093 19.4033 1.35593L19.3658 1.34318C18.5573 1.03118 17.6213 0.84068 16.6448 0.82043H16.6358C15.4358 0.76418 15.0548 0.75293 11.9993 0.75293H12.0001Z" fill="#A9A9A9"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_19_125">
+            <rect width="24" height="24" fill="white"/>
+            </clipPath>
+            </defs>
+          </svg> 
+        </a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Copyright © 2024 <b>Ace Capital Investments.</b> All Rights Reserved. </p>
+      <div class="goole-star">  
+          <img src="assets/img/google-color.png" alt="img" class="arror">
+          <ul class="star">
+            <li><i class="fa-solid fa-star"></i></li>
+            <li><i class="fa-solid fa-star"></i></li>
+            <li><i class="fa-solid fa-star"></i></li>
+            <li><i class="fa-solid fa-star"></i></li>
+            <li><i class="fa-solid fa-star"></i></li>
+          </ul>
+          <span>4.9 out of 5 rating</span>  
+      </div>
+    </div>
+  </div>
+</footer>
+<div id="scroll-percentage"><span id="scroll-percentage-value"></span></div>
+
+<!-- javascript -->
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/custom.js"></script>
+</body>
+</html>
