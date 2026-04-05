@@ -318,8 +318,9 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/custom.js"></script>
 <script>
-  // Set the countdown target date to 3 days from now (April 8, 2026)
-  const countdownDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
+  // Set a fixed countdown target date (April 8, 2026 at 00:00:00 UTC)
+  // This ensures all devices count down to the same time regardless of timezone
+  const countdownDate = new Date("2026-04-08T00:00:00Z").getTime();
   
   // Update countdown every 1 second
   const countdownInterval = setInterval(function() {
